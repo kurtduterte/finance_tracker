@@ -1,35 +1,46 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from 'expo-router'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import { HapticTab } from '@/components/haptic-tab'
+import { AddTabButton } from '@/components/add-tab-button'
+import { useColorScheme } from '@/hooks/use-color-scheme'
+import { Colors } from '@/constants/theme'
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
+  const tint = Colors[colorScheme ?? 'light'].tint
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: tint,
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Dashboard',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="dashboard" size={26} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="add"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Add',
+          tabBarButton: (props) => <AddTabButton {...props} />,
+        }}
+      />
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: 'History',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="history" size={26} color={color} />
+          ),
         }}
       />
     </Tabs>
-  );
+  )
 }

@@ -51,3 +51,52 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+export const MD3Colors = {
+  primary: '#1976D2',
+  primaryContainer: '#BBDEFB',
+  onPrimary: '#FFFFFF',
+  secondary: '#388E3C',
+  error: '#D32F2F',
+  warning: '#F57C00',
+  surface: '#FFFFFF',
+  surfaceVariant: '#F5F5F5',
+  outline: '#E0E0E0',
+  gcash: '#007AFF',
+  maya: '#00B14F',
+  maribank: '#6750A4',
+  cash: '#78909C',
+} as const
+
+export const Spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+} as const
+
+export const BorderRadius = {
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 24,
+  full: 9999,
+} as const
+
+export const Shadow = {
+  card: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  fab: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+} as const

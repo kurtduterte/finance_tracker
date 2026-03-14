@@ -1,13 +1,35 @@
 {
-  "name": "api",
+  "name": "@finance-tracker/api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "start": "node dist/main",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "lint": "eslint src"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-fastify": "^11.0.0",
+    "@nestjs/config": "^4.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "drizzle-orm": "^0.41.0",
+    "postgres": "^3.4.5",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@types/node": "^22.0.0",
+    "drizzle-kit": "^0.30.4",
+    "typescript": "~5.9.2",
+    "ts-node": "^10.9.2"
+  },
   "packageManager": "pnpm@10.30.1"
 }

@@ -1,0 +1,56 @@
+name: iOS Release to TestFlight
+
+on:
+  push:
+    branches:
+      - release/ios
+
+# Cancel older run if a new push arrives on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-submit:
+    name: Build iOS and Submit to TestFlight
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Setup Expo and EAS CLI
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build iOS on EAS and auto-submit to TestFlight
+        working-directory: apps/mobile
+        run: |
+          eas build \
+            --platform ios \
+            --profile production \
+            --auto-submit \
+            --non-interactive \
+            --no-wait
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      # --no-wait: GitHub job finishes in ~4 min after queuing the build.
+      # Actual iOS compilation (~25 min) runs free on EAS cloud Mac workers.
+      # Remove --no-wait to block until the build completes (uses more Linux minutes).

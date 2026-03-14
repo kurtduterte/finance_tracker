@@ -1,0 +1,39 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "base": {
+      "node": "22",
+      "pnpm": "10"
+    },
+    "development": {
+      "extends": "base",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "developmentClient": true
+    },
+    "production": {
+      "extends": "base",
+      "distribution": "store",
+      "channel": "production",
+      "ios": {
+        "resourceClass": "m-medium"
+      },
+      "autoIncrement": "buildNumber"
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "ascAppId": "REPLACE_WITH_ASC_NUMERIC_APP_ID",
+        "appleTeamId": "REPLACE_WITH_APPLE_TEAM_ID",
+        "language": "en-US"
+      }
+    }
+  }
+}
