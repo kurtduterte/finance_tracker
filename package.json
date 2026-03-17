@@ -4,7 +4,7 @@
   "scripts": {
     "dev:web": "pnpm --filter @finance-tracker/web dev",
     "dev:api": "pnpm --filter @finance-tracker/api dev",
-    "dev:mobile": "REACT_NATIVE_PACKAGER_HOSTNAME=$(awk '/nameserver/{print $2;exit}' /etc/resolv.conf) pnpm --filter @finance-tracker/mobile start",
+    "dev:mobile": "pnpm --filter @finance-tracker/mobile start",
     "build:web": "pnpm --filter @finance-tracker/web build",
     "build:api": "pnpm --filter @finance-tracker/api build",
     "build:mobile": "pnpm --filter @finance-tracker/mobile build",
