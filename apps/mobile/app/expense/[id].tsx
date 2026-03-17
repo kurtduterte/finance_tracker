@@ -4,7 +4,6 @@ import { useLocalSearchParams, useRouter } from 'expo-router'
 import { Controller } from 'react-hook-form'
 import { useExpenseForm } from '@/hooks/use-expense-form'
 import { useExpenseStore } from '@/store/expense-store'
-import { useThemeColor } from '@/hooks/use-theme-color'
 import { AmountInput } from '@/components/amount-input'
 import { CategoryGrid } from '@/components/category-grid'
 import { PaymentTypeToggle } from '@/components/payment-type-toggle'
@@ -15,7 +14,6 @@ import { MD3Colors, Spacing, BorderRadius } from '@/constants/theme'
 
 export default function EditExpenseScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
-  const bg = useThemeColor({}, 'background')
   const router = useRouter()
   const deleteExpense = useExpenseStore((s) => s.deleteExpense)
   const { form, submit } = useExpenseForm(id)
@@ -44,6 +42,7 @@ export default function EditExpenseScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: MD3Colors.background }}>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+        <Text style={styles.fieldLabel}>Expense Amount</Text>
         <Controller
           control={control}
           name="amount"
@@ -74,15 +73,19 @@ export default function EditExpenseScreen() {
           )}
         />
         {paymentType === 'online' && (
-          <Controller
-            control={control}
-            name="bank"
-            rules={{ required: 'Select a bank' }}
-            render={({ field: { value, onChange } }) => (
-              <BankPicker value={value} onChange={onChange} error={errors.bank?.message} />
-            )}
-          />
+          <>
+            <Text style={styles.fieldLabel}>Online Payment Method</Text>
+            <Controller
+              control={control}
+              name="bank"
+              rules={{ required: 'Select a payment method' }}
+              render={({ field: { value, onChange } }) => (
+                <BankPicker value={value} onChange={onChange} error={errors.bank?.message} />
+              )}
+            />
+          </>
         )}
+        <Text style={styles.fieldLabel}>Expense</Text>
         <Controller
           control={control}
           name="note"
@@ -106,6 +109,15 @@ export default function EditExpenseScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: Spacing.md, paddingBottom: Spacing.xl },
+  fieldLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: MD3Colors.textSecondary,
+    marginBottom: Spacing.sm,
+    marginTop: Spacing.sm,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
   actions: { gap: Spacing.sm, marginTop: Spacing.md },
   saveBtn: { backgroundColor: MD3Colors.primary, padding: Spacing.md, borderRadius: BorderRadius.xl, alignItems: 'center' },
   saveBtnText: { color: '#fff', fontSize: 16, fontWeight: '700' },

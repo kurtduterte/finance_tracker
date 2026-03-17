@@ -19,7 +19,7 @@ export function NoteInput({ value = '', onChange }: Props) {
         style={[styles.input, { backgroundColor: '#fff', color, borderColor: MD3Colors.outline }]}
         value={value}
         onChangeText={(t) => onChange(t.slice(0, MAX))}
-        placeholder="Note (optional)"
+        placeholder="Expense details (optional)"
         placeholderTextColor={MD3Colors.cash}
         multiline
         numberOfLines={3}

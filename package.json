@@ -5,6 +5,8 @@
     "dev:web": "pnpm --filter @finance-tracker/web dev",
     "dev:api": "pnpm --filter @finance-tracker/api dev",
     "dev:mobile": "pnpm --filter @finance-tracker/mobile start",
+    "dev:mobile:device": "pnpm --filter @finance-tracker/mobile start:device",
+    "dev:mobile:emulator": "pnpm --filter @finance-tracker/mobile start:emulator",
     "build:web": "pnpm --filter @finance-tracker/web build",
     "build:api": "pnpm --filter @finance-tracker/api build",
     "build:mobile": "pnpm --filter @finance-tracker/mobile build",

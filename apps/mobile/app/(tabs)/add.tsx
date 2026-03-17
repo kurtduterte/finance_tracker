@@ -29,6 +29,7 @@ export default function AddExpenseScreen() {
       </View>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
 
+        <Text style={styles.fieldLabel}>Expense Amount</Text>
         <Controller
           control={control}
           name="amount"
@@ -67,11 +68,11 @@ export default function AddExpenseScreen() {
 
         {paymentType === 'online' && (
           <>
-            <Text style={styles.fieldLabel}>Bank</Text>
+            <Text style={styles.fieldLabel}>Online Payment Method</Text>
             <Controller
               control={control}
               name="bank"
-              rules={{ required: paymentType === 'online' ? 'Select a bank' : false }}
+              rules={{ required: paymentType === 'online' ? 'Select a payment method' : false }}
               render={({ field: { value, onChange } }) => (
                 <BankPicker value={value} onChange={onChange} error={errors.bank?.message} />
               )}
@@ -79,7 +80,7 @@ export default function AddExpenseScreen() {
           </>
         )}
 
-        <Text style={styles.fieldLabel}>Note</Text>
+        <Text style={styles.fieldLabel}>Expense</Text>
         <Controller
           control={control}
           name="note"

@@ -1,6 +1,7 @@
 import 'react-native-url-polyfill/auto'
 import { createClient } from '@supabase/supabase-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Platform } from 'react-native'
 import type { Expense } from '@/domain/types'
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL ?? ''
@@ -33,8 +34,8 @@ const webStorage = {
   },
 }
 
-// Use appropriate storage based on platform
-const storage = typeof window !== 'undefined' ? webStorage : AsyncStorage
+// Use web storage for web builds (including static rendering in Node).
+const storage = Platform.OS === 'web' ? webStorage : AsyncStorage
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
