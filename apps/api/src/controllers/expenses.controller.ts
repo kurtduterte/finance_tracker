@@ -3,50 +3,38 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   HttpCode,
   HttpStatus,
   Param,
   Post,
-  UnauthorizedException,
+  Req,
+  UseGuards,
 } from '@nestjs/common'
 import { ExpensesService } from '../services/expenses.service'
 import { SyncExpensesDto } from '../dto/sync-expenses.dto'
+import { SupabaseAuthGuard, AuthenticatedRequest } from '../guards/supabase-auth.guard'
 
+@UseGuards(SupabaseAuthGuard)
 @Controller('expenses')
 export class ExpensesController {
   constructor(private readonly service: ExpensesService) {}
 
-  private getUserId(userId?: string): string {
-    if (!userId) throw new UnauthorizedException('Missing x-user-id header')
-    return userId
-  }
-
   @Get()
-  async findAll(@Headers('x-user-id') userId?: string) {
-    const uid = this.getUserId(userId)
-    const data = await this.service.listByUser(uid)
+  async findAll(@Req() req: AuthenticatedRequest) {
+    const data = await this.service.listByUser(req.user.id)
     return { success: true, data }
   }
 
   @Post('sync')
   @HttpCode(HttpStatus.OK)
-  async sync(
-    @Body() dto: SyncExpensesDto,
-    @Headers('x-user-id') userId?: string,
-  ) {
-    const uid = this.getUserId(userId)
-    await this.service.sync(dto, uid)
+  async sync(@Body() dto: SyncExpensesDto, @Req() req: AuthenticatedRequest) {
+    await this.service.sync(dto, req.user.id)
     return { success: true, synced: dto.expenses.length }
   }
 
   @Delete(':id')
-  async remove(
-    @Param('id') id: string,
-    @Headers('x-user-id') userId?: string,
-  ) {
-    const uid = this.getUserId(userId)
-    await this.service.delete(id, uid)
+  async remove(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
+    await this.service.delete(id, req.user.id)
     return { success: true }
   }
 }

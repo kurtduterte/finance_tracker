@@ -24,12 +24,18 @@ export const BANK_LABELS: Record<BankProvider, string> = {
   gcash: 'GCash',
   maya: 'Maya',
   maribank: 'MariBank',
+  shopeepay: 'ShopeePay',
+  grabpay: 'GrabPay',
+  unionbank: 'UnionBank',
 }
 
 export const BANK_COLORS: Record<BankProvider, string> = {
   gcash: '#007AFF',
   maya: '#00B14F',
   maribank: '#6750A4',
+  shopeepay: '#EE4D2D',
+  grabpay: '#00AEEF',
+  unionbank: '#D4232E',
 }
 
 export const PAYMENT_TYPE_LABELS: Record<PaymentType, string> = {
@@ -42,6 +48,6 @@ export const ALL_CATEGORIES: ExpenseCategory[] = [
   'subscriptions', 'shopping', 'entertainment',
 ]
 
-export const ALL_BANKS: BankProvider[] = ['gcash', 'maya', 'maribank']
+export const ALL_BANKS: BankProvider[] = ['gcash', 'maya', 'maribank', 'shopeepay', 'grabpay', 'unionbank']
 
 export const ALL_PAYMENT_TYPES: PaymentType[] = ['cash', 'online']

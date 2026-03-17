@@ -42,7 +42,7 @@ export default function EditExpenseScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: MD3Colors.background }}>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <Controller
           control={control}
@@ -107,7 +107,7 @@ export default function EditExpenseScreen() {
 const styles = StyleSheet.create({
   content: { padding: Spacing.md, paddingBottom: Spacing.xl },
   actions: { gap: Spacing.sm, marginTop: Spacing.md },
-  saveBtn: { backgroundColor: MD3Colors.primary, padding: Spacing.md, borderRadius: BorderRadius.md, alignItems: 'center' },
+  saveBtn: { backgroundColor: MD3Colors.primary, padding: Spacing.md, borderRadius: BorderRadius.xl, alignItems: 'center' },
   saveBtnText: { color: '#fff', fontSize: 16, fontWeight: '700' },
   deleteBtn: { backgroundColor: 'transparent', padding: Spacing.md, borderRadius: BorderRadius.md, alignItems: 'center', borderWidth: 1, borderColor: MD3Colors.error },
   deleteBtnText: { color: MD3Colors.error, fontSize: 16, fontWeight: '600' },

@@ -9,7 +9,7 @@ export function AddTabButton({ onPress }: BottomTabBarButtonProps) {
       <Pressable
         style={[styles.fab, Shadow.fab]}
         onPress={onPress}
-        android_ripple={{ color: MD3Colors.primaryContainer, borderless: true }}>
+        android_ripple={{ color: '#ffffff33', borderless: true }}>
         <MaterialIcons name="add" size={28} color="#fff" />
       </Pressable>
     </View>
@@ -17,6 +17,13 @@ export function AddTabButton({ onPress }: BottomTabBarButtonProps) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1, alignItems: 'center', justifyContent: 'center', top: -16 },
-  fab: { width: 56, height: 56, borderRadius: 28, backgroundColor: MD3Colors.primary, alignItems: 'center', justifyContent: 'center' },
+  wrapper: { flex: 1, alignItems: 'center', justifyContent: 'center', top: -20 },
+  fab: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: MD3Colors.fabDark,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })

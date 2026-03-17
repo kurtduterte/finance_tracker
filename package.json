@@ -4,7 +4,7 @@
   "scripts": {
     "dev:web": "pnpm --filter @finance-tracker/web dev",
     "dev:api": "pnpm --filter @finance-tracker/api dev",
-    "dev:mobile": "pnpm --filter @finance-tracker/mobile start",
+    "dev:mobile": "REACT_NATIVE_PACKAGER_HOSTNAME=10.2.2.2 && pnpm --filter @finance-tracker/mobile android",
     "build": "pnpm -r build",
     "start": "next start",
     "lint": "eslint"

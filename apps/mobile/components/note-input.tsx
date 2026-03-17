@@ -16,7 +16,7 @@ export function NoteInput({ value = '', onChange }: Props) {
   return (
     <View style={styles.container}>
       <TextInput
-        style={[styles.input, { backgroundColor: bg, color, borderColor: MD3Colors.outline }]}
+        style={[styles.input, { backgroundColor: '#fff', color, borderColor: MD3Colors.outline }]}
         value={value}
         onChangeText={(t) => onChange(t.slice(0, MAX))}
         placeholder="Note (optional)"

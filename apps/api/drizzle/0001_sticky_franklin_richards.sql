@@ -1,0 +1,2 @@
+ALTER TABLE "expenses" DROP CONSTRAINT "bank_check";--> statement-breakpoint
+ALTER TABLE "expenses" ADD CONSTRAINT "bank_check" CHECK ("expenses"."bank" in ('gcash','maya','maribank','shopeepay','grabpay','unionbank') or "expenses"."bank" is null);

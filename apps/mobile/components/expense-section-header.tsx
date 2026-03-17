@@ -30,5 +30,5 @@ export function ExpenseSectionHeader({ date, expenses }: Props) {
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm, backgroundColor: 'transparent' },
-  date: { fontSize: 13, fontWeight: '700', color: MD3Colors.cash },
+  date: { fontSize: 13, fontWeight: '700', color: MD3Colors.textSecondary },
 })

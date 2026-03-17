@@ -9,7 +9,7 @@ export type ExpenseCategory =
 
 export type PaymentType = 'cash' | 'online'
 
-export type BankProvider = 'gcash' | 'maya' | 'maribank'
+export type BankProvider = 'gcash' | 'maya' | 'maribank' | 'shopeepay' | 'grabpay' | 'unionbank'
 
 export type SyncStatus = 'pending' | 'synced' | 'failed'
 

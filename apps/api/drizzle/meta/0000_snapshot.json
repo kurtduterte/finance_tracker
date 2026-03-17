@@ -1,0 +1,115 @@
+{
+  "id": "4b44eca7-12af-41a5-b612-2a36c1215c61",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.expenses": {
+      "name": "expenses",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payment_type": {
+          "name": "payment_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bank": {
+          "name": "bank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "category_check": {
+          "name": "category_check",
+          "value": "\"expenses\".\"category\" in ('general','food','transportation','bills','subscriptions','shopping','entertainment')"
+        },
+        "payment_type_check": {
+          "name": "payment_type_check",
+          "value": "\"expenses\".\"payment_type\" in ('cash','online')"
+        },
+        "bank_check": {
+          "name": "bank_check",
+          "value": "\"expenses\".\"bank\" in ('gcash','maya','maribank') or \"expenses\".\"bank\" is null"
+        },
+        "bank_required_for_online": {
+          "name": "bank_required_for_online",
+          "value": "(\"expenses\".\"payment_type\" = 'online' and \"expenses\".\"bank\" is not null) or (\"expenses\".\"payment_type\" = 'cash' and \"expenses\".\"bank\" is null)"
+        },
+        "amount_positive": {
+          "name": "amount_positive",
+          "value": "\"expenses\".\"amount\" > 0"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -22,15 +22,18 @@ type ExpenseInput = {
 
 type ExpenseStore = {
   expenses: Expense[]
+  pendingDeletes: string[]
   filters: ExpenseFilters
   addExpense: (input: ExpenseInput) => string
   updateExpense: (id: string, input: Partial<ExpenseInput>) => void
   deleteExpense: (id: string) => void
   markSynced: (id: string) => void
   markFailed: (id: string) => void
+  clearPendingDelete: (id: string) => void
   setFilters: (filters: Partial<ExpenseFilters>) => void
   clearFilters: () => void
   getPendingExpenses: () => Expense[]
+  getPendingDeletes: () => string[]
   getFilteredExpenses: () => Expense[]
 }
 
@@ -38,6 +41,7 @@ export const useExpenseStore = create<ExpenseStore>()(
   persist(
     (set, get) => ({
       expenses: [],
+      pendingDeletes: [],
       filters: {},
 
       addExpense: (input) => {
@@ -65,8 +69,14 @@ export const useExpenseStore = create<ExpenseStore>()(
       },
 
       deleteExpense: (id) => {
+        const expense = get().expenses.find((e) => e.id === id)
+        // Only queue a server delete if the expense was already synced
+        const wasSynced = expense?.syncStatus === 'synced'
         set((state) => ({
           expenses: state.expenses.filter((e) => e.id !== id),
+          pendingDeletes: wasSynced
+            ? [...state.pendingDeletes, id]
+            : state.pendingDeletes,
         }))
       },
 
@@ -86,6 +96,12 @@ export const useExpenseStore = create<ExpenseStore>()(
         }))
       },
 
+      clearPendingDelete: (id) => {
+        set((state) => ({
+          pendingDeletes: state.pendingDeletes.filter((d) => d !== id),
+        }))
+      },
+
       setFilters: (filters) => {
         set((state) => ({ filters: { ...state.filters, ...filters } }))
       },
@@ -96,6 +112,8 @@ export const useExpenseStore = create<ExpenseStore>()(
         get().expenses.filter(
           (e) => e.syncStatus === 'pending' || e.syncStatus === 'failed'
         ),
+
+      getPendingDeletes: () => get().pendingDeletes,
 
       getFilteredExpenses: () => {
         const { expenses, filters } = get()

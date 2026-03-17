@@ -35,8 +35,8 @@ export function BankPicker({ value, onChange, error }: Props) {
 
 const styles = StyleSheet.create({
   container: { marginBottom: Spacing.md },
-  row: { flexDirection: 'row', gap: Spacing.sm },
-  option: { flex: 1, paddingVertical: Spacing.sm, alignItems: 'center', borderRadius: BorderRadius.md, borderWidth: 2 },
+  row: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.sm },
+  option: { width: '30%', paddingVertical: Spacing.sm, alignItems: 'center', borderRadius: BorderRadius.md, borderWidth: 2 },
   label: { fontSize: 13, fontWeight: '700' },
   error: { color: '#D32F2F', fontSize: 12, marginTop: 4 },
 })

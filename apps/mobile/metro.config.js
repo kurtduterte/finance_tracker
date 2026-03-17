@@ -15,4 +15,10 @@ config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, "node_modules"),
 ];
 
+// Bind Metro to all interfaces (0.0.0.0) so Android emulator can connect
+config.server = {
+  ...config.server,
+  port: 8081,
+};
+
 module.exports = config;

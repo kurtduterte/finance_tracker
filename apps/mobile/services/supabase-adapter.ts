@@ -50,9 +50,17 @@ export type SyncResult =
   | { success: false; error: string }
 
 export async function upsertExpenses(expenses: Expense[]): Promise<SyncResult> {
+  const { data: sessionData } = await supabase.auth.getSession()
+  const session = sessionData?.session
+
+  if (!session) {
+    return { success: false, error: 'Not authenticated' }
+  }
+
   const { error } = await supabase.from('expenses').upsert(
     expenses.map((e) => ({
       id: e.id,
+      user_id: session.user.id,
       amount: e.amount,
       category: e.category,
       payment_type: e.paymentType,
@@ -64,6 +72,24 @@ export async function upsertExpenses(expenses: Expense[]): Promise<SyncResult> {
     })),
     { onConflict: 'id' }
   )
+
+  if (error) return { success: false, error: error.message }
+  return { success: true }
+}
+
+export async function deleteExpenses(ids: string[]): Promise<SyncResult> {
+  const { data: sessionData } = await supabase.auth.getSession()
+  const session = sessionData?.session
+
+  if (!session) {
+    return { success: false, error: 'Not authenticated' }
+  }
+
+  const { error } = await supabase
+    .from('expenses')
+    .delete()
+    .in('id', ids)
+    .eq('user_id', session.user.id)
 
   if (error) return { success: false, error: error.message }
   return { success: true }

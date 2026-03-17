@@ -14,7 +14,7 @@ export function AmountInput({ value, onChange, error }: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.row, { backgroundColor: bg, borderColor: error ? MD3Colors.error : MD3Colors.outline }]}>
+      <View style={[styles.row, { backgroundColor: '#fff', borderColor: error ? MD3Colors.error : MD3Colors.outline }]}>
         <Text style={[styles.prefix, { color: MD3Colors.primary }]}>₱</Text>
         <TextInput
           style={[styles.input, { color }]}

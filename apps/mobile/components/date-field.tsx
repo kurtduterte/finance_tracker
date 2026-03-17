@@ -23,7 +23,7 @@ export function DateField({ value, onChange, error }: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.row, { borderColor: error ? MD3Colors.error : MD3Colors.outline }]}>
+      <View style={[styles.row, { backgroundColor: '#fff', borderColor: error ? MD3Colors.error : MD3Colors.outline }]}>
         <Pressable onPress={() => adjustDate(-1)} style={styles.arrow}>
           <MaterialIcons name="chevron-left" size={24} color={MD3Colors.primary} />
         </Pressable>

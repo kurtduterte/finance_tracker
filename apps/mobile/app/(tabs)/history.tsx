@@ -1,29 +1,26 @@
-import { SectionList, StyleSheet, View } from 'react-native'
+import { SectionList, StyleSheet, View, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { useGroupedExpenses } from '@/hooks/use-grouped-expenses'
-import { useThemeColor } from '@/hooks/use-theme-color'
 import { ExpenseCard } from '@/components/expense-card'
 import { ExpenseSectionHeader } from '@/components/expense-section-header'
 import { EmptyState } from '@/components/empty-state'
-import { SectionHeader } from '@/components/section-header'
-import { Spacing } from '@/constants/theme'
+import { MD3Colors, Spacing } from '@/constants/theme'
 import type { Expense } from '@/domain/types'
 
-export default function HistoryScreen() {
-  const bg = useThemeColor({}, 'background')
+export default function TransactionScreen() {
   const router = useRouter()
   const sections = useGroupedExpenses()
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.header}>
-        <SectionHeader title="History" />
+        <Text style={styles.title}>Transaction</Text>
       </View>
       {sections.length === 0 ? (
         <EmptyState
           icon="receipt-long"
-          title="No expenses"
+          title="No transactions"
           message="Your expense history will appear here"
           actionLabel="Add Expense"
           onAction={() => router.push('/(tabs)/add')}
@@ -50,6 +47,8 @@ export default function HistoryScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: { padding: Spacing.md, paddingBottom: 0 },
-  list: { padding: Spacing.md },
+  safe: { flex: 1, backgroundColor: MD3Colors.background },
+  header: { paddingHorizontal: Spacing.md, paddingTop: Spacing.sm, paddingBottom: Spacing.xs },
+  title: { fontSize: 22, fontWeight: '800', color: MD3Colors.textPrimary },
+  list: { paddingHorizontal: Spacing.md, paddingBottom: Spacing.xl },
 })
