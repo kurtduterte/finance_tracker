@@ -3,10 +3,11 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "REACT_NATIVE_PACKAGER_HOSTNAME=$(awk '/nameserver/{print $2;exit}' /etc/resolv.conf) expo start",
+    "build": "expo export --platform all",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "REACT_NATIVE_PACKAGER_HOSTNAME=$(awk '/nameserver/{print $2;exit}' /etc/resolv.conf) expo start --android",
+    "ios": "REACT_NATIVE_PACKAGER_HOSTNAME=$(awk '/nameserver/{print $2;exit}' /etc/resolv.conf) expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint"
   },

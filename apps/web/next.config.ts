@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
+import withPWAInit from "@ducanh2912/next-pwa";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const isDevelopment = process.env.NODE_ENV === "development";
 
-export default nextConfig;
+const withPWA = withPWAInit({
+  dest: "public",
+  disable: isDevelopment,
+  cacheOnFrontEndNav: !isDevelopment,
+  aggressiveFrontEndNavCaching: false,
+});
+
+const nextConfig: NextConfig = {};
+
+export default withPWA(nextConfig);

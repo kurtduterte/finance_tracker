@@ -4,9 +4,13 @@
   "scripts": {
     "dev:web": "pnpm --filter @finance-tracker/web dev",
     "dev:api": "pnpm --filter @finance-tracker/api dev",
-    "dev:mobile": "REACT_NATIVE_PACKAGER_HOSTNAME=10.2.2.2 && pnpm --filter @finance-tracker/mobile android",
+    "dev:mobile": "REACT_NATIVE_PACKAGER_HOSTNAME=$(awk '/nameserver/{print $2;exit}' /etc/resolv.conf) pnpm --filter @finance-tracker/mobile start",
+    "build:web": "pnpm --filter @finance-tracker/web build",
+    "build:api": "pnpm --filter @finance-tracker/api build",
+    "build:mobile": "pnpm --filter @finance-tracker/mobile build",
     "build": "pnpm -r build",
-    "start": "next start",
+    "prestart": "pnpm --filter @finance-tracker/web build",
+    "start": "pnpm --filter @finance-tracker/web start",
     "lint": "eslint"
   }
 }

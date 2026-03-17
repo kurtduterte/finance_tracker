@@ -24,9 +24,16 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api')
 
-  const port = parseInt(process.env.PORT ?? '3001', 10)
-  await app.listen(port, '0.0.0.0')
-  console.log(`Finance Tracker API running on http://localhost:${port}`)
+  const host = process.env.HOST ?? '0.0.0.0'
+  const rawPort = process.env.PORT ?? '3001'
+  const port = Number(rawPort)
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`Invalid PORT value "${rawPort}". Use an integer between 1 and 65535.`)
+  }
+
+  await app.listen(port, host)
+  const displayHost = host === '0.0.0.0' ? 'localhost' : host
+  console.log(`Finance Tracker API running on http://${displayHost}:${port}/api`)
 }
 
 bootstrap()
