@@ -45,3 +45,16 @@ export type FinancialSummary = {
   cashTotal: number
   onlineTotal: number
 }
+
+export type UserProfile = {
+  displayName?: string
+  phone?: string
+  bio?: string
+  avatarUrl?: string
+}
+
+export type ProfileUpdateInput = {
+  displayName?: string
+  phone?: string
+  bio?: string
+}
