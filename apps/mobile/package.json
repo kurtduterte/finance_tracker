@@ -14,7 +14,8 @@
     "ios": "expo start --localhost --ios",
     "ios:device": "REACT_NATIVE_PACKAGER_HOSTNAME=$(ip route get 1.1.1.1 | awk '{print $7; exit}') expo start --lan --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "vitest run"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -58,7 +59,8 @@
     "@types/uuid": "^10.0.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vitest": "^2.1.8"
   },
   "private": true,
   "packageManager": "pnpm@10.0.0"

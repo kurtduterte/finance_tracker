@@ -1,8 +1,11 @@
 import type { Expense, FinancialSummary, BankTotals, CategoryTotals } from '@/domain/types'
-import { ALL_CATEGORIES } from '@/domain/constants'
+import { ALL_BANKS, ALL_CATEGORIES } from '@/domain/constants'
 
 export function computeFinancialSummary(expenses: Expense[]): FinancialSummary {
-  const bankTotals: BankTotals = { gcash: 0, maya: 0, maribank: 0 }
+  const bankTotals = ALL_BANKS.reduce(
+    (acc, bank) => ({ ...acc, [bank]: 0 }),
+    {} as BankTotals
+  )
   const categoryTotals = ALL_CATEGORIES.reduce(
     (acc, cat) => ({ ...acc, [cat]: 0 }),
     {} as CategoryTotals
